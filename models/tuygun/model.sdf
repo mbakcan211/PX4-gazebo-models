@@ -1,0 +1,448 @@
+<?xml version="1.0"?>
+<sdf version='1.11'>
+  <model name='tuygun'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.52773999999999999 2.4842e-07 0.036554999999999997 0 0 0</pose>
+        <mass>3.8500000000000001</mass>
+        <inertia>
+          <ixx>3.3416000000000001</ixx>
+          <ixy>1.4572999999999999e-05</ixy>
+          <ixz>0.051393000000000001</ixz>
+          <iyy>1.1224000000000001</iyy>
+          <iyz>-8.0568000000000005e-07</iyz>
+          <izz>4.3966000000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+
+      <sensor name="algan_camera_front" type="camera">
+        <pose>0.5 0 0.1 0 0 0</pose>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov> <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>5000</far> </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>algan_camera_front</topic>
+      </sensor>
+
+    </link>
+    <joint name='flap' type='revolute'>
+      <pose relative_to='base_link'>-0.64049 0.34975000000000001 0.065132999999999996 0 0 1.5708</pose>
+      <parent>base_link</parent>
+      <child>flap_front</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='flap_front'>
+      <pose relative_to='flap'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.34999999999999998 0.019332999999999999 0.0077253 0 0 0</pose>
+        <mass>0.24243999999999999</mass>
+        <inertia>
+          <ixx>4.6532000000000001e-05</ixx>
+          <ixy>1.1183e-20</ixy>
+          <ixz>-4.042e-21</ixz>
+          <iyy>0.0029185999999999999</iyy>
+          <iyz>4.2208999999999998e-20</iyz>
+          <izz>0.0029627</izz>
+        </inertia>
+      </inertial>
+      <collision name='flap_front_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_front.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='flap_front_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_front.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='flap(1)' type='revolute'>
+      <pose relative_to='base_link'>-1.0135000000000001 -0.046901999999999999 0.068770999999999999 -2.7431999999999999 -0.74466000000000021 -1.8487</pose>
+      <parent>base_link</parent>
+      <child>flap_back</child>
+      <axis>
+        <xyz>0.67771999999999999 -0.28527000000000002 -0.67771999999999999</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='flap_back'>
+      <pose relative_to='flap(1)'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011845 -0.0075948999999999999 -0.080187999999999995 0 0 0</pose>
+        <mass>0.10779</mass>
+        <inertia>
+          <ixx>0.00016375</ixx>
+          <ixy>1.9817000000000001e-08</ixy>
+          <ixz>-1.8925000000000001e-06</ixz>
+          <iyy>0.00030838000000000003</iyy>
+          <iyz>1.9572999999999999e-08</iyz>
+          <izz>0.00016379</izz>
+        </inertia>
+      </inertial>
+      <collision name='flap_back_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_back.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='flap_back_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_back.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+
+    <joint name='rotor_puller' type='revolute'>
+      <pose relative_to='base_link'>-1.0972 0 0.025000000000000001 3.1415853071795858 0.38841000000000003 -1.5708</pose>
+      <parent>base_link</parent>
+      <child>propeller_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rotor_puller_joint'>
+      <pose relative_to='rotor_puller'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>3.4176999999999999e-06 0.011431999999999999 -0.00043375 0 0 0</pose>
+        <mass>0.022766999999999999</mass>
+        <inertia>
+          <ixx>8.5097999999999996e-07</ixx>
+          <ixy>-5.8258999999999995e-10</ixy>
+          <ixz>1.3689000000000001e-09</ixz>
+          <iyy>0.00023505999999999999</iyy>
+          <iyz>3.6394000000000002e-07</iyz>
+          <izz>0.00023491000000000001</izz>
+        </inertia>
+      </inertial>
+      <collision name='propeller_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/propeller_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='propeller_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/propeller_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.637250006 0.637250006 0.735300064 1</diffuse>
+          <ambient>0.637250006 0.637250006 0.735300064 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>servo_3</joint_name>
+      <sub_topic>servo_3</sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    <plugin filename="libAirSpeedPlugin.so" name="px4::AirSpeed">
+      <link_name>base_link</link_name>
+    </plugin>
+    <plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
+      <a0>0.0</a0>
+      <CL0>0.15188</CL0>
+      <AR>6.5</AR>
+      <eff>0.97</eff>
+      <CLa>5.015</CLa>
+      <CD0>0.029</CD0>
+      <Cem0>0.075</Cem0>
+      <Cema>-0.463966</Cema>
+      <CYb>-0.258244</CYb>
+      <Cellb>-0.039250</Cellb>
+      <Cenb>0.100826</Cenb>
+      <CDp>0.0</CDp>
+      <CYp>0.065861</CYp>
+      <CLp>0.0</CLp>
+      <Cellp>-0.487407</Cellp>
+      <Cemp>0.0</Cemp>
+      <Cenp>-0.040416</Cenp>
+      <CDq>0.055166</CDq>
+      <CYq>0.0</CYq>
+      <CLq>7.971792</CLq>
+      <Cellq>0.0</Cellq>
+      <Cemq>-12.140140</Cemq>
+      <Cenq>0.0</Cenq>
+      <CDr>0.0</CDr>
+      <CYr>0.230299</CYr>
+      <CLr>0.0</CLr>
+      <Cellr>0.078165</Cellr>
+      <Cemr>0.0</Cemr>
+      <Cenr>-0.089947</Cenr>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <CLa_stall>-3.85</CLa_stall>
+      <CDa_stall>-0.9233984055</CDa_stall>
+      <Cema_stall>0</Cema_stall>
+      <cp>-0.12 0.0 0.0</cp>
+      <area>0.34</area>
+      <mac>0.22</mac>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <num_ctrl_surfaces>4</num_ctrl_surfaces>
+      <control_surface>
+        <name>servo_0</name>
+        <index>0</index>
+        <direction>1</direction>
+        <CD_ctrl>-0.000059</CD_ctrl>
+        <CY_ctrl>0.000171</CY_ctrl>
+        <CL_ctrl>-0.011940</CL_ctrl>
+        <Cell_ctrl>-0.003331</Cell_ctrl>
+        <Cem_ctrl>0.001498</Cem_ctrl>
+        <Cen_ctrl>-0.000057</Cen_ctrl>
+      </control_surface>
+      <control_surface>
+        <name>servo_1</name>
+        <direction>1</direction>
+        <index>1</index>
+        <CD_ctrl>-0.000059</CD_ctrl>
+        <CY_ctrl>-0.000171</CY_ctrl>
+        <CL_ctrl>-0.011940</CL_ctrl>
+        <Cell_ctrl>0.003331</Cell_ctrl>
+        <Cem_ctrl>0.001498</Cem_ctrl>
+        <Cen_ctrl>0.000057</Cen_ctrl>
+      </control_surface>
+      <control_surface>
+        <name>servo_2</name>
+        <direction>-1</direction>
+        <index>2</index>
+        <CD_ctrl>0.000274</CD_ctrl>
+        <CY_ctrl>0</CY_ctrl>
+        <CL_ctrl>0.010696</CL_ctrl>
+        <Cell_ctrl>0.0</Cell_ctrl>
+        <Cem_ctrl>-0.025798</Cem_ctrl>
+        <Cen_ctrl>0.0</Cen_ctrl>
+      </control_surface>
+      <control_surface>
+        <name>servo_3</name>
+        <direction>1</direction>
+        <index>3</index>
+        <CD_ctrl>0.0</CD_ctrl>
+        <CY_ctrl>-0.003913</CY_ctrl>
+        <CL_ctrl>0.0</CL_ctrl>
+        <Cell_ctrl>-0.000257</Cell_ctrl>
+        <Cem_ctrl>0.0</Cem_ctrl>
+        <Cen_ctrl>0.001613</Cen_ctrl>
+      </control_surface>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_puller_joint</jointName>
+      <linkName>rotor_puller</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>3500</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+
+    </plugin>
+
+  </model>
+</sdf>
