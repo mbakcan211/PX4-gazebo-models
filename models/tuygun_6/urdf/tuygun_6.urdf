@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="tuygun_6">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.52774 2.4842E-07 0.036555"
+        rpy="0 0 0" />
+      <mass
+        value="3.85" />
+      <inertia
+        ixx="3.3416"
+        ixy="1.4573E-05"
+        ixz="0.051393"
+        iyy="1.1224"
+        iyz="-8.0568E-07"
+        izz="4.3966" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="flap_front">
+    <inertial>
+      <origin
+        xyz="-0.35 0.019333 0.0077253"
+        rpy="0 0 0" />
+      <mass
+        value="0.24244" />
+      <inertia
+        ixx="4.6532E-05"
+        ixy="1.1183E-20"
+        ixz="-4.042E-21"
+        iyy="0.0029186"
+        iyz="4.2209E-20"
+        izz="0.0029627" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/flap_front.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/flap_front.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="flap"
+    type="revolute">
+    <origin
+      xyz="-0.64049 0.34975 0.065133"
+      rpy="0 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="flap_front" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="flap_back">
+    <inertial>
+      <origin
+        xyz="0.011845 -0.0075949 -0.080188"
+        rpy="0 0 0" />
+      <mass
+        value="0.10779" />
+      <inertia
+        ixx="0.00016375"
+        ixy="1.9817E-08"
+        ixz="-1.8925E-06"
+        iyy="0.00030838"
+        iyz="1.9573E-08"
+        izz="0.00016379" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/flap_back.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/flap_back.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="flap(1)"
+    type="revolute">
+    <origin
+      xyz="-1.0135 -0.046902 0.068771"
+      rpy="-2.7432 -0.74466 -1.8487" />
+    <parent
+      link="base_link" />
+    <child
+      link="flap_back" />
+    <axis
+      xyz="0.67772 -0.28527 -0.67772" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="propeller_link">
+    <inertial>
+      <origin
+        xyz="3.4177E-06 0.011432 -0.00043375"
+        rpy="0 0 0" />
+      <mass
+        value="0.022767" />
+      <inertia
+        ixx="8.5098E-07"
+        ixy="-5.8259E-10"
+        ixz="1.3689E-09"
+        iyy="0.00023506"
+        iyz="3.6394E-07"
+        izz="0.00023491" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/propeller_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.5098 0.5098 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://tuygun_6/meshes/propeller_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="propeller"
+    type="continuous">
+    <origin
+      xyz="-1.0972 0 0.025"
+      rpy="-3.1416 0.38841 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="propeller_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+</robot>

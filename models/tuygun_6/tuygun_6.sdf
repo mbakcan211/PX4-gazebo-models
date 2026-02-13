@@ -1,0 +1,203 @@
+<sdf version='1.11'>
+  <model name='tuygun_6'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.52773999999999999 2.4842e-07 0.036554999999999997 0 0 0</pose>
+        <mass>3.8500000000000001</mass>
+        <inertia>
+          <ixx>3.3416000000000001</ixx>
+          <ixy>1.4572999999999999e-05</ixy>
+          <ixz>0.051393000000000001</ixz>
+          <iyy>1.1224000000000001</iyy>
+          <iyz>-8.0568000000000005e-07</iyz>
+          <izz>4.3966000000000003</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='flap' type='revolute'>
+      <pose relative_to='base_link'>-0.64049 0.34975000000000001 0.065132999999999996 0 0 1.5708</pose>
+      <parent>base_link</parent>
+      <child>flap_front</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='flap_front'>
+      <pose relative_to='flap'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-0.34999999999999998 0.019332999999999999 0.0077253 0 0 0</pose>
+        <mass>0.24243999999999999</mass>
+        <inertia>
+          <ixx>4.6532000000000001e-05</ixx>
+          <ixy>1.1183e-20</ixy>
+          <ixz>-4.042e-21</ixz>
+          <iyy>0.0029185999999999999</iyy>
+          <iyz>4.2208999999999998e-20</iyz>
+          <izz>0.0029627</izz>
+        </inertia>
+      </inertial>
+      <collision name='flap_front_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_front.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='flap_front_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_front.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='flap(1)' type='revolute'>
+      <pose relative_to='base_link'>-1.0135000000000001 -0.046901999999999999 0.068770999999999999 -2.7431999999999999 -0.74466000000000021 -1.8487</pose>
+      <parent>base_link</parent>
+      <child>flap_back</child>
+      <axis>
+        <xyz>0.67771999999999999 -0.28527000000000002 -0.67771999999999999</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='flap_back'>
+      <pose relative_to='flap(1)'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.011845 -0.0075948999999999999 -0.080187999999999995 0 0 0</pose>
+        <mass>0.10779</mass>
+        <inertia>
+          <ixx>0.00016375</ixx>
+          <ixy>1.9817000000000001e-08</ixy>
+          <ixz>-1.8925000000000001e-06</ixz>
+          <iyy>0.00030838000000000003</iyy>
+          <iyz>1.9572999999999999e-08</iyz>
+          <izz>0.00016379</izz>
+        </inertia>
+      </inertial>
+      <collision name='flap_back_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_back.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='flap_back_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/flap_back.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.990199983 1 1 1</diffuse>
+          <ambient>0.990199983 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='propeller' type='revolute'>
+      <pose relative_to='base_link'>-1.0972 0 0.025000000000000001 3.1415853071795858 0.38841000000000003 -1.5708</pose>
+      <parent>base_link</parent>
+      <child>propeller_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='propeller_link'>
+      <pose relative_to='propeller'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>3.4176999999999999e-06 0.011431999999999999 -0.00043375 0 0 0</pose>
+        <mass>0.022766999999999999</mass>
+        <inertia>
+          <ixx>8.5097999999999996e-07</ixx>
+          <ixy>-5.8258999999999995e-10</ixy>
+          <ixz>1.3689000000000001e-09</ixz>
+          <iyy>0.00023505999999999999</iyy>
+          <iyz>3.6394000000000002e-07</iyz>
+          <izz>0.00023491000000000001</izz>
+        </inertia>
+      </inertial>
+      <collision name='propeller_link_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/propeller_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='propeller_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/propeller_link.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.637250006 0.637250006 0.735300064 1</diffuse>
+          <ambient>0.637250006 0.637250006 0.735300064 1</ambient>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
